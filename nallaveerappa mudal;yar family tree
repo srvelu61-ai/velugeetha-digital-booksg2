@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Nallveerappa Mudaliyar – Family Tree</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg:#f5f0e8;--card:#fff;--gold:#b8860b;--brown:#5c3a1e;
+    --text:#2d1a06;--muted:#7a5c3a;--border:#d4b896;--shadow:0 4px 20px rgba(92,58,30,0.12);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);font-family:'Noto Serif',serif;color:var(--text);min-height:100vh;}
+
+  nav{background:#2d1a06;display:flex;align-items:center;justify-content:space-between;padding:12px 28px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.3);}
+  nav .logo{color:#ffe8b0;font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;text-decoration:none;}
+  nav .links{display:flex;gap:20px;}
+  nav .links a{color:#e8c96a;text-decoration:none;font-size:0.88rem;font-weight:600;}
+  nav .links a:hover{color:#fff;}
+
+  header{background:linear-gradient(135deg,#2d1a06,#5c3a1e,#b8860b);color:#fff;text-align:center;padding:52px 20px 40px;}
+  header h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,5vw,3rem);font-weight:800;text-shadow:0 2px 8px rgba(0,0,0,0.4);margin-bottom:8px;}
+  header p{font-size:1rem;color:#ffe8b0;}
+
+  main{max-width:1100px;margin:0 auto;padding:44px 16px 64px;}
+
+  /* ── TREE LAYOUT ── */
+  .tree{display:flex;flex-direction:column;align-items:center;}
+
+  /* Generation label */
+  .gen-label{font-size:0.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin:32px 0 12px;background:rgba(184,134,11,0.1);border:1px solid var(--border);border-radius:20px;padding:4px 16px;}
+
+  /* Row of people */
+  .gen-row{display:flex;flex-wrap:wrap;justify-content:center;gap:16px 24px;position:relative;}
+
+  /* Connecting line above row */
+  .gen-row::before{
+    content:'';position:absolute;top:-20px;left:50%;transform:translateX(-50%);
+    width:2px;height:20px;background:var(--border);
+  }
+  .gen-row.root::before{display:none;}
+
+  /* Person card */
+  .person{
+    background:var(--card);border:1.5px solid var(--border);border-radius:12px;
+    padding:14px 18px;min-width:150px;max-width:200px;text-align:center;
+    box-shadow:var(--shadow);position:relative;transition:transform 0.2s,box-shadow 0.2s;cursor:default;
+  }
+  .person:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(92,58,30,0.18);}
+  .person.patriarch{border-color:var(--gold);border-width:2.5px;background:#fffbf0;}
+  .person.matriarch{border-color:#d4879a;background:#fff5f7;}
+  .person .avatar{font-size:2rem;display:block;margin-bottom:6px;}
+  .person .name{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:var(--brown);line-height:1.3;}
+  .person .years{font-size:0.75rem;color:var(--muted);margin-top:3px;}
+  .person .role{font-size:0.72rem;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:0.06em;margin-top:4px;}
+
+  /* Horizontal connector */
+  .couple{display:flex;align-items:center;gap:8px;}
+  .couple-line{font-size:1.2rem;color:var(--gold);flex-shrink:0;}
+
+  /* Branch connector */
+  .branch-connector{width:2px;height:28px;background:var(--border);margin:0 auto;}
+
+  /* Horizontal spread line */
+  .spread-line{width:60%;height:2px;background:var(--border);margin:0 auto;}
+
+  /* Note card */
+  .note-card{background:#fffbf0;border:1.5px dashed var(--border);border-radius:12px;padding:18px 24px;margin:32px 0;font-size:0.9rem;color:var(--muted);line-height:1.7;}
+  .note-card strong{color:var(--brown);}
+
+  /* Legend */
+  .legend{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin:32px 0 0;font-size:0.82rem;color:var(--muted);}
+  .legend-item{display:flex;align-items:center;gap:8px;}
+  .legend-dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--gold);}
+  .legend-dot.matriarch{border-color:#d4879a;}
+  .legend-dot.descendant{border-color:var(--border);}
+
+  footer{text-align:center;padding:28px 16px;color:var(--muted);font-size:0.85rem;border-top:1px solid var(--border);background:#ede5d5;}
+  footer a{color:var(--brown);text-decoration:none;font-weight:600;}
+  footer a:hover{text-decoration:underline;}
+
+  @media(max-width:600px){
+    .person{min-width:120px;padding:10px 12px;}
+    .gen-row{gap:10px 12px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">📚 Velugeetha Books</a>
+  <div class="links">
+    <a href="index.html">← Books</a>
+    <a href="#gen1">Founder</a>
+    <a href="#gen3">3rd Gen</a>
+    <a href="#gen4">4th Gen</a>
+  </div>
+</nav>
+
+<header>
+  <h1>🌳 Nallveerappa Mudaliyar</h1>
+  <p>Family Tree &nbsp;·&nbsp; நல்வீரப்ப முதலியார் குடும்ப வரலாறு</p>
+</header>
+
+<main>
+
+  <div class="note-card">
+    <strong>📜 About this family tree:</strong> This page documents the lineage of the Nallveerappa Mudaliyar family.
+    Please share names, dates, and relationships to fill in any missing branches. The tree below is a starting
+    template — update the HTML with actual family data.
+  </div>
+
+  <div class="tree">
+
+    <!-- GENERATION 1 -->
+    <div class="gen-label" id="gen1">Generation 1 – Founder</div>
+    <div class="gen-row root">
+      <div class="couple">
+        <div class="person patriarch">
+          <span class="avatar">👴</span>
+          <div class="name">Nallveerappa Mudaliyar</div>
+          <div class="years"><!-- e.g. 1820 – 1890 --></div>
+          <div class="role">Patriarch</div>
+        </div>
+        <span class="couple-line">⚭</span>
+        <div class="person matriarch">
+          <span class="avatar">👵</span>
+          <div class="name"><!-- Wife's name --></div>
+          <div class="years"><!-- Years --></div>
+          <div class="role">Matriarch</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="branch-connector"></div>
+    <div class="spread-line"></div>
+
+    <!-- GENERATION 2 -->
+    <div class="gen-label" id="gen2">Generation 2 – Children</div>
+    <div class="gen-row">
+      <div class="person">
+        <span class="avatar">👨</span>
+        <div class="name">Son 1<br><small><!-- Name --></small></div>
+        <div class="years"><!-- Years --></div>
+        <div class="role"><!-- Role / occupation --></div>
+      </div>
+      <div class="person">
+        <span class="avatar">👩</span>
+        <div class="name">Daughter 1<br><small><!-- Name --></small></div>
+        <div class="years"><!-- Years --></div>
+        <div class="role"><!-- Role --></div>
+      </div>
+      <div class="person">
+        <span class="avatar">👨</span>
+        <div class="name">Son 2<br><small><!-- Name --></small></div>
+        <div class="years"><!-- Years --></div>
+        <div class="role"><!-- Role --></div>
+      </div>
+      <!-- Add more children as needed -->
+    </div>
+
+    <div class="branch-connector"></div>
+    <div class="spread-line"></div>
+
+    <!-- GENERATION 3 -->
+    <div class="gen-label" id="gen3">Generation 3 – Grandchildren</div>
+    <div class="gen-row">
+      <div class="person">
+        <span class="avatar">🧑</span>
+        <div class="name"><!-- Name --></div>
+        <div class="years"><!-- Years --></div>
+        <div class="role"><!-- Role --></div>
+      </div>
+      <div class="person">
+        <span class="avatar">🧑</span>
+        <div class="name"><!-- Name --></div>
+        <div class="years"><!-- Years --></div>
+        <div class="role"><!-- Role --></div>
+      </div>
+      <div class="person">
+        <span class="avatar">🧑</span>
+        <div class="name"><!-- Name --></div>
+        <div class="years"><!-- Years --></div>
+        <div class="role"><!-- Role --></div>
+      </div>
+      <div class="person">
+        <span class="avatar">🧑</span>
+        <div class="name"><!-- Name --></div>
+        <div class="years"><!-- Years --></div>
+        <div class="role"><!-- Role --></div>
+      </div>
+      <!-- Add more grandchildren as needed -->
+    </div>
+
+    <div class="branch-connector"></div>
+    <div class="spread-line"></div>
+
+    <!-- GENERATION 4 -->
+    <div class="gen-label" id="gen4">Generation 4 – Great-Grandchildren</div>
+    <div class="gen-row">
+      <div class="person">
+        <span class="avatar">👦</span>
+        <div class="name"><!-- Name --></div>
+        <div class="years"><!-- Years --></div>
+        <div class="role"><!-- Role --></div>
+      </div>
+      <div class="person">
+        <span class="avatar">👧</span>
+        <div class="name"><!-- Name --></div>
+        <div class="years"><!-- Years --></div>
+        <div class="role"><!-- Role --></div>
+      </div>
+      <!-- Add more as needed -->
+    </div>
+
+  </div><!-- end .tree -->
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot"></div> Patriarch line</div>
+    <div class="legend-item"><div class="legend-dot matriarch"></div> Matriarch line</div>
+    <div class="legend-item"><div class="legend-dot descendant"></div> Descendants</div>
+  </div>
+
+  <div class="note-card" style="margin-top:40px;">
+    <strong>✏️ How to add family members:</strong> Each person is a <code>&lt;div class="person"&gt;</code> block.
+    Fill in the <code>name</code>, <code>years</code>, and <code>role</code> fields. Copy and paste
+    a block to add more members. Add <code>class="patriarch"</code> or <code>class="matriarch"</code>
+    to highlight key ancestors.
+  </div>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Nallveerappa Mudaliyar Family Tree</p>
+  <p style="margin-top:8px;"><a href="index.html">← Back to Velugeetha Books</a></p>
+</footer>
+</body>
+</html>
